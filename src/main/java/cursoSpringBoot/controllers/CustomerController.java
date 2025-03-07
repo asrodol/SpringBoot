@@ -40,4 +40,19 @@ public class CustomerController {
         return  cus;
     }
 
+    @RequestMapping( method = RequestMethod.PUT)
+    public Customer updateCustomer(@RequestBody Customer cus){
+        for(Customer c: listCust){
+            if(c.getId()== cus.getId()){
+                c.setName(cus.getName());
+                c.setUsaerName(cus.getUsaerName());
+                c.setPassword(cus.getPassword());
+
+                return c;
+            }
+        }
+        
+        return null;
+    }
+
 }
