@@ -1,6 +1,8 @@
 package cursoSpringBoot.controllers;
 
 import cursoSpringBoot.domain.Customer;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,51 +21,54 @@ public class CustomerController {
     ));
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Customer> showCustomers(){
-        return listCust;
+    public ResponseEntity <List<Customer>> showCustomers(){
+
+        return ResponseEntity.ok(listCust);
     }
 
+
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Customer serarchCustomer(@PathVariable int id){
+    public ResponseEntity <?> serarchCustomer(@PathVariable int id){
         for (Customer c:listCust){
             if (c.getId()==id){
-                 return c;
+                 return ResponseEntity.ok(c);
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente NO encontrado");
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Customer saveCustomer(@RequestBody Customer cus){
+    public ResponseEntity<?> saveCustomer(@RequestBody Customer cus){
         listCust.add(cus);
 
-        return  cus;
+        return  ResponseEntity.status(HttpStatus.CREATED).body("Cliente creado correctamente");
     }
 
     @RequestMapping( method = RequestMethod.PUT)
-    public Customer updateCustomer(@RequestBody Customer cus){
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer cus){
         for(Customer c: listCust){
             if(c.getId()== cus.getId()){
                 c.setName(cus.getName());
                 c.setUsaerName(cus.getUsaerName());
                 c.setPassword(cus.getPassword());
 
-                return c;
+                return ResponseEntity.ok("Operacion exitosa");
             }
         }
 
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public Customer deleteCustomer(@PathVariable int id){
+    public ResponseEntity<?> deleteCustomer(@PathVariable int id){
         for(Customer c: listCust){
             if(id == c.getId()){
                 listCust.remove(c);
-                return c;
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cliente eliminado");
             }
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado gracias");
     }
 
 }

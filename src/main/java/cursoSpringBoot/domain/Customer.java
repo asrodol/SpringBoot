@@ -4,12 +4,12 @@ package cursoSpringBoot.domain;
 public class Customer {
 
     private int id;
-    private String name, usaerName, password;
+    private String name, userName, password;
 
     public Customer(int id, String name, String usaerName, String password) {
         this.id = id;
         this.name = name;
-        this.usaerName = usaerName;
+        this.userName = usaerName;
         this.password = password;
     }
 
@@ -30,11 +30,11 @@ public class Customer {
     }
 
     public String getUsaerName() {
-        return usaerName;
+        return userName;
     }
 
     public void setUsaerName(String usaerName) {
-        this.usaerName = usaerName;
+        this.userName = usaerName;
     }
 
     public String getPassword() {
