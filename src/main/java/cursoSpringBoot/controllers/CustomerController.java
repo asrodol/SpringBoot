@@ -51,7 +51,18 @@ public class CustomerController {
                 return c;
             }
         }
-        
+
+        return null;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Customer deleteCustomer(@PathVariable int id){
+        for(Customer c: listCust){
+            if(id == c.getId()){
+                listCust.remove(c);
+                return c;
+            }
+        }
         return null;
     }
 
