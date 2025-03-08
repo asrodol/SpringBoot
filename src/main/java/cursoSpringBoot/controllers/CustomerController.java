@@ -1,10 +1,13 @@
 package cursoSpringBoot.controllers;
 
 import cursoSpringBoot.domain.Customer;
+import org.apache.catalina.valves.rewrite.Substitution;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,8 +45,14 @@ public class CustomerController {
     public ResponseEntity<?> saveCustomer(@RequestBody Customer cus){
         listCust.add(cus);
 
-        return  ResponseEntity.status(HttpStatus.CREATED).body("Cliente creado correctamente");
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(cus.getId())
+                .toUri();
 
+        //return  ResponseEntity.status(HttpStatus.CREATED).body("Cliente creado correctamente");
+        return ResponseEntity.created(location).body(cus);
     }
 
     @RequestMapping( method = RequestMethod.PUT)
