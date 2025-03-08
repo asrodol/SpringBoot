@@ -50,7 +50,7 @@ public class CustomerController {
         for(Customer c: listCust){
             if(c.getId()== cus.getId()){
                 c.setName(cus.getName());
-                c.setUsaerName(cus.getUsaerName());
+                c.setUserName(cus.getUserName());
                 c.setPassword(cus.getPassword());
 
                 return ResponseEntity.ok("Operacion exitosa");

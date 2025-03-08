@@ -6,10 +6,10 @@ public class Customer {
     private int id;
     private String name, userName, password;
 
-    public Customer(int id, String name, String usaerName, String password) {
+    public Customer(int id, String name, String userName, String password) {
         this.id = id;
         this.name = name;
-        this.userName = usaerName;
+        this.userName = userName;
         this.password = password;
     }
 
@@ -29,12 +29,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getUsaerName() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUsaerName(String usaerName) {
-        this.userName = usaerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
