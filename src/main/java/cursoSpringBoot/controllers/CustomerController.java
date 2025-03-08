@@ -35,7 +35,7 @@ public class CustomerController {
                  return ResponseEntity.ok(c);
             }
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente NO encontrado");
+        return ResponseEntity.notFound().build();
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -43,6 +43,7 @@ public class CustomerController {
         listCust.add(cus);
 
         return  ResponseEntity.status(HttpStatus.CREATED).body("Cliente creado correctamente");
+
     }
 
     @RequestMapping( method = RequestMethod.PUT)
@@ -53,11 +54,11 @@ public class CustomerController {
                 c.setUserName(cus.getUserName());
                 c.setPassword(cus.getPassword());
 
-                return ResponseEntity.ok("Operacion exitosa");
+                return ResponseEntity.noContent().build();
             }
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
+        return ResponseEntity.notFound().build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -65,10 +66,13 @@ public class CustomerController {
         for(Customer c: listCust){
             if(id == c.getId()){
                 listCust.remove(c);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cliente eliminado");
+                //return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
+                return ResponseEntity.noContent().build();
             }
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado gracias");
+
+        //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado gracias");
+        return ResponseEntity.notFound().build();
     }
 
 }
